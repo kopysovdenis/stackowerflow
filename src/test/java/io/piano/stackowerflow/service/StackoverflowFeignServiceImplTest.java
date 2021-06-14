@@ -39,9 +39,9 @@ class StackoverflowFeignServiceImplTest {
                 .quotaMax(1)
                 .build();
 
-        when(apiCallerFeignClientSync.getData(anyString(), anyString(), anyString(), anyString())).thenReturn(ResponseEntity.ok(itemResponse));
-        Optional<ItemResponse> result = stackoverflowFeignService.searchQuery("java");
+        when(apiCallerFeignClientSync.getData(anyString(), anyInt(), anyInt(), anyString(), anyString(), anyString())).thenReturn(ResponseEntity.ok(itemResponse));
+        Optional<ItemResponse> result = stackoverflowFeignService.searchQuery("java", 1, 1, "desc", "activity", "stackoverflow");
         assertTrue(result.isPresent());
-        verify(apiCallerFeignClientSync).getData(anyString(), anyString(), anyString(), anyString());
+        verify(apiCallerFeignClientSync).getData(anyString(), anyInt(), anyInt(), anyString(), anyString(), anyString());
     }
 }

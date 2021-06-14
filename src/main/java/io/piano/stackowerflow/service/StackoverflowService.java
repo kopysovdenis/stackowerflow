@@ -10,5 +10,5 @@ import java.util.Optional;
  * <p>Service for processing search queries </p>
  */
 public interface StackoverflowService {
-    Optional<ItemResponse> searchQuery(String query);
+    Optional<ItemResponse> searchQuery(String searchText, Integer page, Integer pagesize, String order, String sort, String site);
 }

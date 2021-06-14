@@ -20,6 +20,7 @@ import java.util.List;
 
 import static java.util.Optional.of;
 import static org.hamcrest.Matchers.is;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -53,18 +54,18 @@ class StackoverflowControllerTest {
                 .quotaRemaining(1)
                 .build();
 
-        when(apiCallerFeignClientSync.getData(anyString(), anyString(), anyString(), anyString())).thenReturn(ResponseEntity.ok(itemResponse));
-        when(stackoverflowService.searchQuery(anyString())).thenReturn(of(itemResponse));
+        when(apiCallerFeignClientSync.getData(anyString(), anyInt(), anyInt(), anyString(), anyString(), anyString())).thenReturn(ResponseEntity.ok(itemResponse));
+        when(stackoverflowService.searchQuery(anyString(), anyInt(), anyInt(), anyString(), anyString(), anyString())).thenReturn(of(itemResponse));
     }
 
     @Test
     @DisplayName("Test for getting data from api")
     void getSearch() throws Exception {
         mockMvc.perform(get("/api/search")
-                .param("text", "java%20s")
+                .param("intitle", "java%20s")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("quotaMax", is(1)))
+                .andExpect(jsonPath("quota_max", is(1)))
                 .andDo(print())
                 .andReturn();
     }

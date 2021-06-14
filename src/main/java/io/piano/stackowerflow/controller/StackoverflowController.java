@@ -28,12 +28,19 @@ public class StackoverflowController {
      *
      * @param searchText поисковый запрос/request text
      * @return ResponseEntity<ItemResponse> a list of questions
+     * desc&sort=activity&intitle=java&site=stackoverflow
      */
     @GetMapping(value = "/search")
-    public ResponseEntity<ItemResponse> getSearch(@RequestParam("text") String searchText) {
+    public ResponseEntity<ItemResponse> getSearch(@RequestParam("intitle") String searchText,
+                                                  @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+                                                  @RequestParam(value = "pagesize", required = false, defaultValue = "30") Integer pagesize,
+                                                  @RequestParam(value = "order", required = false, defaultValue = "desc") String order,
+                                                  @RequestParam(value = "sort", required = false, defaultValue = "activity") String sort,
+                                                  @RequestParam(value = "site", required = false, defaultValue = "stackoverflow") String site) {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json");
-        return stackoverflowService.searchQuery(searchText)
+        headers.add("Access-Control-Allow-Origin", "*");
+        return stackoverflowService.searchQuery(searchText, page, pagesize, order, sort, site)
                 .map(p -> new ResponseEntity<>(p, headers, OK))
                 .orElse(new ResponseEntity<>(NOT_FOUND));
     }

@@ -25,8 +25,8 @@ public class StackoverflowFeignServiceImpl implements StackoverflowService {
     private final ApiCallerFeignClientSync apiCallerFeignClientSync;
 
     @Override
-    public Optional<ItemResponse> searchQuery(String query) {
-        ResponseEntity<ItemResponse> response = apiCallerFeignClientSync.getData(query, "desc", "stackoverflow", "activity");
+    public Optional<ItemResponse> searchQuery(String searchText, Integer page, Integer pagesize, String order, String sort, String site) {
+        ResponseEntity<ItemResponse> response = apiCallerFeignClientSync.getData(searchText, page, pagesize, order, sort, site);
         return of(response)
                 .filter(isOk())
                 .map(HttpEntity::getBody);

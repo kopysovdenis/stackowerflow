@@ -1,7 +1,6 @@
 package io.piano.stackowerflow.model.api.response;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 
 import javax.annotation.Generated;
@@ -11,53 +10,37 @@ import java.util.List;
 @Generated("jsonschema2pojo")
 public class Item {
 
-    @SerializedName("tags")
-    @Expose
+    @JsonProperty("tags")
     private List<String> tags = null;
-    @SerializedName("owner")
-    @Expose
+    @JsonProperty("owner")
     private Owner owner;
-    @SerializedName("is_answered")
-    @Expose
+    @JsonProperty("is_answered")
     private Boolean isAnswered;
-    @SerializedName("view_count")
-    @Expose
+    @JsonProperty("view_count")
     private Integer viewCount;
-    @SerializedName("answer_count")
-    @Expose
+    @JsonProperty("answer_count")
     private Integer answerCount;
-    @SerializedName("score")
-    @Expose
+    @JsonProperty("score")
     private Integer score;
-    @SerializedName("last_activity_date")
-    @Expose
+    @JsonProperty("last_activity_date")
     private Integer lastActivityDate;
-    @SerializedName("creation_date")
-    @Expose
+    @JsonProperty("creation_date")
     private Integer creationDate;
-    @SerializedName("last_edit_date")
-    @Expose
+    @JsonProperty("last_edit_date")
     private Integer lastEditDate;
-    @SerializedName("question_id")
-    @Expose
+    @JsonProperty("question_id")
     private Integer questionId;
-    @SerializedName("content_license")
-    @Expose
+    @JsonProperty("content_license")
     private String contentLicense;
-    @SerializedName("link")
-    @Expose
+    @JsonProperty("link")
     private String link;
-    @SerializedName("title")
-    @Expose
+    @JsonProperty("title")
     private String title;
-    @SerializedName("accepted_answer_id")
-    @Expose
+    @JsonProperty("accepted_answer_id")
     private Integer acceptedAnswerId;
-    @SerializedName("closed_date")
-    @Expose
+    @JsonProperty("closed_date")
     private Integer closedDate;
-    @SerializedName("closed_reason")
-    @Expose
+    @JsonProperty("closed_reason")
     private String closedReason;
 
     public List<String> getTags() {

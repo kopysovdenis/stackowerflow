@@ -1,7 +1,6 @@
 package io.piano.stackowerflow.model.api.response;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 
 import javax.annotation.Generated;
@@ -11,17 +10,13 @@ import java.util.List;
 @Generated("jsonschema2pojo")
 public class ItemResponse {
 
-    @SerializedName("items")
-    @Expose
+    @JsonProperty("items")
     private List<Item> items = null;
-    @SerializedName("has_more")
-    @Expose
+    @JsonProperty("has_more")
     private Boolean hasMore;
-    @SerializedName("quota_max")
-    @Expose
+    @JsonProperty("quota_max")
     private Integer quotaMax;
-    @SerializedName("quota_remaining")
-    @Expose
+    @JsonProperty("quota_remaining")
     private Integer quotaRemaining;
 
     public List<Item> getItems() {

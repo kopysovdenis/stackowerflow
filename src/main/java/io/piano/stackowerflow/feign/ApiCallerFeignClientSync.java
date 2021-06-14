@@ -23,10 +23,15 @@ public interface ApiCallerFeignClientSync {
      *
      * @param searchText поисковая строка/search text
      * @param order      порядок/order
-     * @param site       сайт для поиска/search site
      * @param sort       порядок сортировки/sorting order
+     * @param site       сайт для поиска/search site
      * @return Упорядоченый список вопросов/An ordered list of questions
      */
     @GetMapping(value = "/search", consumes = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<ItemResponse> getData(@RequestParam("intitle") String searchText, @RequestParam("order") String order, @RequestParam("site") String site, @RequestParam("sort") String sort);
+    ResponseEntity<ItemResponse> getData(@RequestParam("intitle") String searchText,
+                                         @RequestParam("page") Integer page,
+                                         @RequestParam("pagesize") Integer pagesize,
+                                         @RequestParam("order") String order,
+                                         @RequestParam("sort") String sort,
+                                         @RequestParam("site") String site);
 }

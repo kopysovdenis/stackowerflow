@@ -1,7 +1,6 @@
 package io.piano.stackowerflow.model.api.response;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 
 import javax.annotation.Generated;
@@ -10,26 +9,19 @@ import javax.annotation.Generated;
 @Generated("jsonschema2pojo")
 public class Owner {
 
-    @SerializedName("reputation")
-    @Expose
+    @JsonProperty("reputation")
     private Integer reputation;
-    @SerializedName("user_id")
-    @Expose
+    @JsonProperty("user_id")
     private Integer userId;
-    @SerializedName("user_type")
-    @Expose
+    @JsonProperty("user_type")
     private String userType;
-    @SerializedName("profile_image")
-    @Expose
+    @JsonProperty("profile_image")
     private String profileImage;
-    @SerializedName("display_name")
-    @Expose
+    @JsonProperty("display_name")
     private String displayName;
-    @SerializedName("link")
-    @Expose
+    @JsonProperty("link")
     private String link;
-    @SerializedName("accept_rate")
-    @Expose
+    @JsonProperty("accept_rate")
     private Integer acceptRate;
 
     public Integer getReputation() {
