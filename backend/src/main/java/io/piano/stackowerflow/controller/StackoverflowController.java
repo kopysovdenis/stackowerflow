@@ -37,11 +37,18 @@ public class StackoverflowController {
                                                   @RequestParam(value = "order", required = false, defaultValue = "desc") String order,
                                                   @RequestParam(value = "sort", required = false, defaultValue = "activity") String sort,
                                                   @RequestParam(value = "site", required = false, defaultValue = "stackoverflow") String site) {
+
+        return stackoverflowService.searchQuery(searchText, page, pagesize, order, sort, site)
+                .map(p -> new ResponseEntity<>(p, getHttpHeaders(), OK))
+                .orElse(new ResponseEntity<>(NOT_FOUND));
+    }
+
+    private HttpHeaders getHttpHeaders() {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Type", "application/json");
         headers.add("Access-Control-Allow-Origin", "*");
-        return stackoverflowService.searchQuery(searchText, page, pagesize, order, sort, site)
-                .map(p -> new ResponseEntity<>(p, headers, OK))
-                .orElse(new ResponseEntity<>(NOT_FOUND));
+        return headers;
     }
+
+
 }
