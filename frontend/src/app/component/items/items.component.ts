@@ -1,6 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import {Item} from '../../models/item/item.model'
 import {ItemService} from "../../service/item/item.service";
+import {MatTableDataSource} from "@angular/material/table";
+import {MatPaginator} from "@angular/material/paginator";
 
 @Component({
   selector: 'app-items',
@@ -12,14 +14,17 @@ export class ItemsComponent implements OnInit {
   constructor(private itemService: ItemService) {
   }
 
+  ngOnInit(): void {}
+
   searchInput: string = '';
   items: Item[] = [];
   selectedItem?: Item;
   hasMore: boolean = false;
 
-  ngOnInit(): void {
-    // this.getItems(this.searchInput);
-  }
+  displayedColumns: string[] = ['id', 'title'/*, 'creation date', 'is answered', 'author'*/];
+  dataSource = new MatTableDataSource<Item>(this.items);
+
+
 
   onSelect(item: Item): void {
     this.selectedItem = item;
@@ -31,6 +36,7 @@ export class ItemsComponent implements OnInit {
       .subscribe((response) => {
         this.items = response.items
         this.hasMore = response.hasMore
+        this.dataSource = new MatTableDataSource<Item>(response.items);
       });
   }
 
