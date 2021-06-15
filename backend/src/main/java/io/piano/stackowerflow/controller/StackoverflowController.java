@@ -28,7 +28,6 @@ public class StackoverflowController {
      *
      * @param searchText поисковый запрос/request text
      * @return ResponseEntity<ItemResponse> a list of questions
-     * desc&sort=activity&intitle=java&site=stackoverflow
      */
     @GetMapping(value = "/search")
     public ResponseEntity<ItemResponse> getSearch(@RequestParam("intitle") String searchText,
