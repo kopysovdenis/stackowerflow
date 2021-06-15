@@ -1,10 +1,21 @@
 <h2>My itemes</h2>
 
+<mat-form-field class="example-form-field">
+  <mat-label>Clearable input</mat-label>
+  <input matInput type="text" [(ngModel)]="searchInput">
+  <button *ngIf="searchInput" matSuffix mat-icon-button aria-label="Find" (click)="getItems()">
+    <mat-icon>search</mat-icon>
+  </button>
+</mat-form-field>
 <ul class="itemes">
   <li *ngFor="let item of items"
-      [class.selected]="item === selectedItem"
+      [ngClass]="{
+        selected: item === selectedItem,
+        'answer-tt': item.is_answered
+      }"
       (click)="onSelect(item)">
-      <span class="badge">{{item.question_id}}</span> {{item.title}}
+    <span class="badge">{{item.question_id}}</span> {{item.title}}
+
   </li>
 </ul>
 

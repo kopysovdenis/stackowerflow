@@ -1,7 +1,6 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
-import { Item } from "../../models/item/item.model";
-import { HttpClient } from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {catchError, tap} from "rxjs/operators";
 import {SearchResponseModel} from "../../models/item/search.response.model";
 
@@ -9,12 +8,13 @@ import {SearchResponseModel} from "../../models/item/search.response.model";
   providedIn: 'root'
 })
 export class ItemService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   private searchUrl = 'http://localhost:8090/api/search';
 
   getItems(inTitle: string): Observable<SearchResponseModel> {
-    return this.http.get<SearchResponseModel>(this.searchUrl, { params: {intitle: inTitle}}).pipe(
+    return this.http.get<SearchResponseModel>(this.searchUrl, {params: {intitle: inTitle}}).pipe(
       tap(_ => this.log('fetched SearchResponseModel')),
       catchError(this.handleError<SearchResponseModel>('getItems', undefined))
     );
