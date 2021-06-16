@@ -85,9 +85,9 @@ table {
 
 .example-loading-shade {
   position: absolute;
-  top: 0;
+  top: 54px;
   left: 0;
-  bottom: 56px;
+  bottom: 0;
   right: 0;
   background: rgba(0, 0, 0, 0.15);
   z-index: 1;
@@ -107,6 +107,20 @@ table {
   max-width: 64px;
 }
 
+.mat-paginator-range-label div {
+  display: none !important;
+}
 .mat-column-created {
   max-width: 124px;
+}
+
+.demo-row-is-clicked {
+  background-color: #888888;
+}
+
+.search-input {
+  padding: 20px;
+  background-color: lightgray;
+  display: flex;
+  justify-content: center;
 }

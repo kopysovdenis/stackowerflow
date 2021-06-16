@@ -13,7 +13,7 @@ export class ItemService {
 
   private searchUrl = 'http://localhost:8090/api/search';
 
-  getItems(intitle: string, page: number = 1,  pagesize: number = 10): Observable<SearchResponseModel> {
+  getItems(intitle: string = '', page: number = 1,  pagesize: number = 10): Observable<SearchResponseModel> {
     return this.http.get<SearchResponseModel>(this.searchUrl, {params: {
       intitle,
         page,

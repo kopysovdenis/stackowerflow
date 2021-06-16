@@ -23,7 +23,8 @@ export class ItemsComponent implements OnInit, AfterViewInit {
   length: number = 0;
   pageIndex: number = 1;
   pageSize: number = 10;
-  pageSizeOptions: number[] = [10, 25, 100];
+  pageSizeOptions: number[] = [10, 25, 50, 100];
+  isNoResult: boolean = true;
 
   isLoadingResults = false;
 
@@ -46,15 +47,22 @@ export class ItemsComponent implements OnInit, AfterViewInit {
   }
 
   getItems(): void {
+    if (this.searchInput.length === 0)
+      return;
     this.isLoadingResults = true;
     this.itemService.getItems(this.searchInput, this.paginator.pageIndex + 1, this.paginator.pageSize)
       .subscribe((response) => {
         this.isLoadingResults = false;
+
+        if (response === undefined)
+          return;
+
         this.items = response.items
-        this.hasMore = response.hasMore
+        this.hasMore = response.has_more
+        this.length = response.has_more ? 999 : 0;
         this.pageIndex = this.paginator.pageIndex + 1;
         this.pageSize = this.paginator.pageSize;
-        this.length = response.quotaRemaining;
+        this.isNoResult = response.quota_remaining === 0;
         this.dataSource = new MatTableDataSource<Item>(response.items);
       });
   }

@@ -2,7 +2,7 @@ import {Item} from "./item.model";
 
 export interface SearchResponseModel {
   items: Item[];
-  hasMore: boolean;
-  quotaMax: number;
-  quotaRemaining: number;
+  has_more: boolean;
+  quota_max: number;
+  quota_remaining: number;
 }
