@@ -3,8 +3,6 @@ import {Item} from '../../models/item/item.model'
 import {ItemService} from "../../service/item/item.service";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator, PageEvent} from "@angular/material/paginator";
-import {catchError, tap} from "rxjs/operators";
-import {SearchResponseModel} from "../../models/item/search.response.model";
 
 @Component({
   selector: 'app-items',
