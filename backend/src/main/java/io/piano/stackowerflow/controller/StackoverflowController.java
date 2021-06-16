@@ -5,6 +5,7 @@ import feign.FeignException;
 import io.piano.stackowerflow.model.api.response.ItemResponse;
 import io.piano.stackowerflow.service.StackoverflowService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +18,7 @@ import java.util.Optional;
 import static org.springframework.http.HttpStatus.*;
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
 
+@Slf4j
 @RestController
 @RequestMapping(value = "/api", produces = APPLICATION_JSON_UTF8_VALUE)
 @RequiredArgsConstructor
@@ -43,10 +45,9 @@ public class StackoverflowController {
 
         try {
             result = stackoverflowService.searchQuery(searchText, page, pagesize, order, sort, site);
-        } catch (FeignException.BadRequest badRequest) {
+        } catch (FeignException badRequest) {
+            log.error("Error for request", badRequest);
             return new ResponseEntity<>(badRequest.getMessage(), getHttpHeaders(), BAD_REQUEST);
-        } catch (FeignException.NotFound notFound) {
-            return new ResponseEntity<>(notFound.getMessage(), getHttpHeaders(), NOT_FOUND);
         }
 
         return result.map(p -> new ResponseEntity<>(p, getHttpHeaders(), OK))
