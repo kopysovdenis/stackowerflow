@@ -1,5 +1,6 @@
 package io.piano.stackowerflow.feign;
 
+import feign.FeignException;
 import io.piano.stackowerflow.model.api.response.ItemResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
@@ -33,5 +34,5 @@ public interface ApiCallerFeignClientSync {
                                          @RequestParam("pagesize") Integer pagesize,
                                          @RequestParam("order") String order,
                                          @RequestParam("sort") String sort,
-                                         @RequestParam("site") String site);
+                                         @RequestParam("site") String site) throws FeignException;
 }

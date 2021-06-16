@@ -1,5 +1,6 @@
 package io.piano.stackowerflow.service;
 
+import feign.FeignException;
 import io.piano.stackowerflow.feign.ApiCallerFeignClientSync;
 import io.piano.stackowerflow.model.api.response.ItemResponse;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +26,7 @@ public class StackoverflowFeignServiceImpl implements StackoverflowService {
     private final ApiCallerFeignClientSync apiCallerFeignClientSync;
 
     @Override
-    public Optional<ItemResponse> searchQuery(String searchText, Integer page, Integer pagesize, String order, String sort, String site) {
+    public Optional<ItemResponse> searchQuery(String searchText, Integer page, Integer pagesize, String order, String sort, String site) throws FeignException{
         ResponseEntity<ItemResponse> response = apiCallerFeignClientSync.getData(searchText, page, pagesize, order, sort, site);
         return of(response)
                 .filter(isOk())
