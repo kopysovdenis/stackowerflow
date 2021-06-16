@@ -13,8 +13,12 @@ export class ItemService {
 
   private searchUrl = 'http://localhost:8090/api/search';
 
-  getItems(inTitle: string): Observable<SearchResponseModel> {
-    return this.http.get<SearchResponseModel>(this.searchUrl, {params: {intitle: inTitle}}).pipe(
+  getItems(intitle: string, page: number = 1,  pagesize: number = 10): Observable<SearchResponseModel> {
+    return this.http.get<SearchResponseModel>(this.searchUrl, {params: {
+      intitle,
+        page,
+        pagesize
+    }}).pipe(
       tap(_ => this.log('fetched SearchResponseModel')),
       catchError(this.handleError<SearchResponseModel>('getItems', undefined))
     );
