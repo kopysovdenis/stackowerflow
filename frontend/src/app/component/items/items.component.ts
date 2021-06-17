@@ -55,6 +55,11 @@ export class ItemsComponent implements OnInit, AfterViewInit {
         if (response === undefined)
           return;
 
+        if (response.items.length === 0) {
+          this.isNoResult = true;
+          return;
+        }
+
         this.items = response.items
         this.hasMore = response.has_more
         this.length = response.has_more ? 999 : 0;
